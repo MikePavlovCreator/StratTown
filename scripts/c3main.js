@@ -32181,7 +32181,12 @@ var GetAudioDOMInterface2;
     (p) => {
       const f0 = p._GetNode(0).GetBoundMethod();
       return () => f0(250, 290);
-    }
+    },
+    (p) => {
+      const f0 = p._GetNode(0).GetBoundMethod();
+      return () => f0(2500, 5e3);
+    },
+    () => 0.1
   ];
 }
 var unaryminus2;
@@ -32215,7 +32220,9 @@ self.C3_GetObjectRefTable = function() {
     C3.Behaviors.Bullet.Acts.SetSpeed,
     C3.Behaviors.Bullet.Acts.SetAngleOfMotion,
     C3.Plugins.System.Exps.random,
-    C3.Plugins.Audio.Acts.Play
+    C3.Behaviors.Bullet.Acts.SetGravity,
+    C3.Plugins.Audio.Acts.Play,
+    C3.Plugins.System.Acts.Wait
   ];
 };
 self.C3_JsPropNameTable = [
