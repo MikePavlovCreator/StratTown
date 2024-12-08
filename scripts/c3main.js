@@ -29737,176 +29737,6 @@ var SortZOrderList2;
 var SortInstancesByValue2;
 {
   {
-    const a = self.C3, b = "button";
-    a.Plugins.Button = class extends a.SDKDOMPluginBase {
-      constructor(e) {
-        super(e, b), this.AddElementMessageHandler("click", (e2, t) => e2._OnClick(t));
-      }
-      Release() {
-        super.Release();
-      }
-    };
-  }
-  {
-    const g = self.C3;
-    g.Plugins.Button.Type = class extends g.SDKTypeBase {
-      constructor(e) {
-        super(e);
-      }
-      Release() {
-        super.Release();
-      }
-      OnCreate() {
-      }
-    };
-  }
-  {
-    const j = self.C3, k = self.C3X, l = 0, m = 1, n = 2, o = 3, p = 4, q = 5, r = 6, s = 7, t = 8, u = "button", v = (j.Plugins.Button.Instance = class extends j.SDKDOMInstanceBase {
-      constructor(e, i) {
-        super(e, u), this._text = "OK", this._isCheckbox = false, this._isChecked = false, this._title = "", this._id = "", this._className = "", this._isEnabled = true, this._autoFontSize = true, i && (this._isCheckbox = 1 === i[l], this._text = i[m], this._title = i[n], this.GetWorldInfo().SetVisible(i[o]), this._isEnabled = i[p], this._autoFontSize = i[q], this._isChecked = i[r], this._id = i[s], this._className = i[t]), this.CreateElement({ "id": this._id, "className": this._className });
-      }
-      Release() {
-        super.Release();
-      }
-      GetElementState() {
-        return { "text": this._text, "isCheckbox": this._isCheckbox, "isChecked": this._isChecked, "title": this._title, "isVisible": this.GetWorldInfo().IsVisible(), "isEnabled": this._isEnabled };
-      }
-      async _OnClick(e) {
-        this._isChecked = e["isChecked"], this.DispatchScriptEvent("click", true), await this.TriggerAsync(j.Plugins.Button.Cnds.OnClicked);
-      }
-      _SetText(e) {
-        this._text !== e && (this._text = e, this.UpdateElementState());
-      }
-      _GetText() {
-        return this._text;
-      }
-      _SetTooltip(e) {
-        this._title !== e && (this._title = e, this.UpdateElementState());
-      }
-      _GetTooltip() {
-        return this._title;
-      }
-      _SetEnabled(e) {
-        this._isEnabled !== (e = !!e) && (this._isEnabled = e, this.UpdateElementState());
-      }
-      _IsEnabled() {
-        return this._isEnabled;
-      }
-      _SetChecked(e) {
-        this._isCheckbox && this._isChecked !== (e = !!e) && (this._isChecked = e, this.UpdateElementState());
-      }
-      _IsChecked() {
-        return this._isChecked;
-      }
-      Draw(e) {
-      }
-      SaveToJson() {
-        return { "text": this._text, "checked": this._isChecked, "title": this._title, "enabled": this._isEnabled };
-      }
-      LoadFromJson(e) {
-        this._text = e["text"], this._isChecked = e["checked"], this._title = e["title"], this._isEnabled = e["enabled"], this.UpdateElementState();
-      }
-      GetPropertyValueByIndex(e) {
-        switch (e) {
-          case m:
-            return this._GetText();
-          case n:
-            return this._GetTooltip();
-          case p:
-            return this._IsEnabled();
-          case q:
-            return this._autoFontSize;
-          case r:
-            return this._IsChecked();
-        }
-      }
-      SetPropertyValueByIndex(e, t2) {
-        switch (e) {
-          case m:
-            this._SetText(t2);
-            break;
-          case n:
-            this._SetTooltip(t2);
-            break;
-          case p:
-            this._SetEnabled(!!t2);
-            break;
-          case q:
-            this._autoFontSize = !!t2;
-            break;
-          case r:
-            this._SetChecked(!!t2);
-        }
-      }
-      GetDebuggerProperties() {
-        const e = "plugins.button";
-        return [{ title: e + ".name", properties: [{ name: e + ".properties.text.name", value: this._GetText(), onedit: (e2) => this._SetText(e2) }, { name: e + ".properties.enabled.name", value: this._IsEnabled(), onedit: (e2) => this._SetEnabled(e2) }, { name: e + ".properties.checked.name", value: this._IsChecked(), onedit: (e2) => this._SetChecked(e2) }] }];
-      }
-      GetScriptInterfaceClass() {
-        return self.IButtonInstance;
-      }
-    }, /* @__PURE__ */ new WeakMap());
-    self.IButtonInstance = class extends self.IDOMInstance {
-      constructor() {
-        super(), v.set(this, self.IInstance._GetInitInst().GetSdkInstance());
-      }
-      set text(e) {
-        k.RequireString(e), v.get(this)._SetText(e);
-      }
-      get text() {
-        return v.get(this)._GetText();
-      }
-      set tooltip(e) {
-        k.RequireString(e), v.get(this)._SetTooltip(e);
-      }
-      get tooltip() {
-        return v.get(this)._GetTooltip();
-      }
-      set isEnabled(e) {
-        v.get(this)._SetEnabled(e);
-      }
-      get isEnabled() {
-        return v.get(this)._IsEnabled();
-      }
-      set isChecked(e) {
-        v.get(this)._SetChecked(e);
-      }
-      get isChecked() {
-        return v.get(this)._IsChecked();
-      }
-    };
-  }
-  {
-    const S = self.C3;
-    S.Plugins.Button.Cnds = { OnClicked() {
-      return true;
-    }, IsChecked() {
-      return this._isChecked;
-    }, CompareText(e, t) {
-      return t ? this._text === e : S.equalsNoCase(this._text, e);
-    } };
-  }
-  {
-    const V = self.C3;
-    V.Plugins.Button.Acts = { SetText(e) {
-      this._SetText(e);
-    }, SetTooltip(e) {
-      this._SetTooltip(e);
-    }, SetChecked(e) {
-      this._SetChecked(0 !== e);
-    }, ToggleChecked() {
-      this._isCheckbox && (this._isChecked = !this._isChecked, this.UpdateElementState());
-    } };
-  }
-  {
-    const Z = self.C3;
-    Z.Plugins.Button.Exps = { Text() {
-      return this._text;
-    } };
-  }
-}
-{
-  {
     const a = self.C3;
     a.Plugins.Touch = class extends a.SDKPluginBase {
       constructor(t) {
@@ -30257,6 +30087,600 @@ var GetTouchSdkInstance2;
       }
     }
   };
+}
+{
+  {
+    const a = self.C3;
+    a.Plugins.Sprite = class extends a.SDKPluginBase {
+      constructor(t) {
+        super(t);
+      }
+      Release() {
+        super.Release();
+      }
+    };
+  }
+  {
+    const d = self.C3, e = self.C3X, f = [], g = (d.Plugins.Sprite.Type = class extends d.SDKTypeBase {
+      constructor(t) {
+        super(t), this._animations = t.GetAnimations();
+      }
+      Release() {
+        d.clearArray(this._animations), super.Release();
+      }
+      OnCreate() {
+        for (const t of this._animations) t.LoadAllAssets(this._runtime);
+      }
+      LoadTextures(e2) {
+        const n = { sampling: this._runtime.GetSampling() };
+        return Promise.all(this._animations.map((t) => t.LoadAllTextures(e2, n)));
+      }
+      ReleaseTextures() {
+        for (const t of this._animations) t.ReleaseAllTextures();
+      }
+      OnDynamicTextureLoadComplete() {
+        this._UpdateAllCurrentTexture();
+      }
+      _UpdateAllCurrentTexture() {
+        for (const t of this._objectClass.instancesIncludingPendingCreate()) t.GetSdkInstance()._UpdateCurrentTexture();
+      }
+      FinishCondition(t) {
+        d.Plugins.Sprite.FinishCollisionCondition(this, t);
+      }
+      BeforeRunAction(t) {
+        f.push({ objectClass: null, createHierarchy: false, instances: [] });
+      }
+      _SpawnPickInstance(t, e2, n) {
+        const i = f.at(-1);
+        i.objectClass = t, i.createHierarchy = n, i.instances.push(e2);
+      }
+      AfterRunAction(t) {
+        const e2 = f.pop(), n = e2.objectClass, i = e2.createHierarchy;
+        if (n) {
+          const r = /* @__PURE__ */ new Map();
+          for (const a of e2.instances) a.CollectInstancesToPick(r, n, i);
+          for (const [s, o] of r) s.GetCurrentSol().SetSetPicked(o);
+        }
+      }
+      _AddAnimation(t) {
+        const e2 = this.GetObjectClass().AddAnimation(t), n = this.GetRuntime(), i = e2.GetFrameAt(0);
+        return i.GetImageInfo().LoadStaticTexture(n.GetRenderer(), { sampling: n.GetSampling() }).then(() => this._UpdateAllCurrentTexture()), e2;
+      }
+      _RemoveAnimation(t) {
+        for (const e2 of this._objectClass.instancesIncludingPendingCreate()) e2.GetSdkInstance()._OnAnimationRemoved(t);
+        this.GetObjectClass().RemoveAnimation(t);
+      }
+      _AddAnimationFrame(t, e2) {
+        const n = this._objectClass.GetAnimationByName(t);
+        if (!n) throw new Error(`cannot find animation name '${t}'`);
+        let i = n.FrameTagOrIndexToIndex(e2);
+        i < 0 && (i += n.GetFrameCount() + 1);
+        const r = d.AnimationFrameInfo.CreateDynamic(this.GetRuntime()), a = (n.InsertFrameAt(r, i), this.GetRuntime());
+        r.GetImageInfo().LoadStaticTexture(a.GetRenderer(), { sampling: a.GetSampling() }).then(() => this._UpdateAllCurrentTexture());
+        for (const s of this._objectClass.instancesIncludingPendingCreate()) s.GetSdkInstance()._OnAnimationFramesChanged();
+        return r;
+      }
+      _RemoveAnimationFrame(t, e2) {
+        const n = this._objectClass.GetAnimationByName(t);
+        if (!n) throw new Error(`cannot find animation name '${t}'`);
+        if (1 === n.GetFrameCount()) throw new Error(`cannot remove last frame from animation '${t}'`);
+        let i = n.FrameTagOrIndexToIndex(e2);
+        i < 0 && (i += n.GetFrameCount()), n.RemoveFrameAt(i);
+        for (const r of this._objectClass.instancesIncludingPendingCreate()) r.GetSdkInstance()._OnAnimationFramesChanged();
+      }
+      GetScriptInterfaceClass() {
+        return self.ISpriteObjectType;
+      }
+    }, /* @__PURE__ */ new WeakMap());
+    self.ISpriteObjectType = class extends self.IObjectClass {
+      constructor(t) {
+        super(t), g.set(this, t.GetSdkType());
+      }
+      getAnimation(t) {
+        e.RequireString(t);
+        const n = g.get(this).GetObjectClass().GetAnimationByName(t);
+        return n ? n.GetIAnimation() : null;
+      }
+      getAllAnimations() {
+        return g.get(this).GetObjectClass().GetAllAnimations().map((t) => t.GetIAnimation());
+      }
+      addAnimation(t) {
+        return e.RequireString(t), g.get(this)._AddAnimation(t).GetIAnimation();
+      }
+      removeAnimation(t) {
+        e.RequireString(t), g.get(this)._RemoveAnimation(t);
+      }
+      addAnimationFrame(t, n) {
+        if (e.RequireString(t), "number" != typeof n && "string" != typeof n) throw new TypeError("invalid insert location");
+        return g.get(this)._AddAnimationFrame(t, n).GetIAnimationFrame();
+      }
+      removeAnimationFrame(t, n) {
+        if (e.RequireString(t), "number" != typeof n && "string" != typeof n) throw new TypeError("invalid insert location");
+        g.get(this)._RemoveAnimationFrame(t, n);
+      }
+    };
+  }
+  {
+    const ea = self.C3, fa = self.C3X, ga = 0, ha = 1, ia = 2, ja = 3, ka = ea.New(ea.Rect), la = ea.New(ea.Quad), ma = ea.New(ea.Vector2), na = 1, oa = 2, pa = 4, qa = (ea.Plugins.Sprite.Instance = class extends ea.SDKWorldInstanceBase {
+      constructor(t, e) {
+        super(t);
+        let n = true, i = "", r = 0, a = true;
+        e && (n = !!e[ga], i = e[ha], r = e[ia], a = e[ja]), this._currentAnimation = this._objectClass.GetAnimationByName(i) || this._objectClass.GetAnimations()[0], this._currentFrameIndex = ea.clamp(r, 0, this._currentAnimation.GetFrameCount() - 1), this._currentAnimationFrame = this._currentAnimation.GetFrameAt(this._currentFrameIndex);
+        const s = this._currentAnimationFrame.GetImageInfo(), o = (this._currentTexture = s.GetTexture(), this._currentRcTex = s.GetTexRect(), this._currentQuadTex = s.GetTexQuad(), this.HandleRendererContextLoss(), t.SetFlag(oa, true), t.SetFlag(na, 0 <= this._currentAnimation.GetSpeed()), this._currentAnimationSpeed = Math.abs(this._currentAnimation.GetSpeed()), this._currentAnimationRepeatTo = this._currentAnimation.GetRepeatTo(), this._animationTimer = ea.New(ea.KahanSum), this._frameStartTime = 0, this._animationRepeats = 0, this._animTriggerName = "", this._changeAnimFrameIndex = -1, this._changeAnimationName = "", this._changeAnimationFrom = 0, this.GetWorldInfo());
+        this._bquadRef = o.GetBoundingQuad(), o.SetVisible(n), o.SetCollisionEnabled(a), o.SetOriginX(this._currentAnimationFrame.GetOriginX()), o.SetOriginY(this._currentAnimationFrame.GetOriginY()), o.SetSourceCollisionPoly(this._currentAnimationFrame.GetCollisionPoly()), o.SetBboxChanged(), 1 === this._objectClass.GetAnimationCount() && 1 === this._objectClass.GetAnimations()[0].GetFrameCount() || 0 === this._currentAnimationSpeed || this._StartTicking();
+      }
+      Release() {
+        this._currentAnimation = null, this._currentAnimationFrame = null, this._currentTexture = null, this._animationTimer = null, super.Release();
+      }
+      GetCurrentImageInfo() {
+        return this._currentAnimationFrame.GetImageInfo();
+      }
+      IsOriginalSizeKnown() {
+        return true;
+      }
+      OnRendererContextLost() {
+        this._currentTexture = null;
+      }
+      OnRendererContextRestored() {
+        this._UpdateCurrentTexture();
+      }
+      Draw(t) {
+        const e = this._currentTexture;
+        if (null !== e) {
+          t.SetTexture(e);
+          const n = this.GetWorldInfo();
+          n.HasMesh() ? this._DrawMesh(n, t) : this._DrawStandard(n, t);
+        }
+      }
+      _DrawStandard(t, e) {
+        let n = this._bquadRef;
+        this._runtime.IsPixelRoundingEnabled() && (n = t.PixelRoundQuad(n)), e.Quad4(n, this._currentQuadTex);
+      }
+      _DrawMesh(e, t) {
+        const n = e.GetTransformedMesh();
+        if (e.IsMeshChanged()) {
+          e.CalculateBbox(ka, la, false);
+          let t2 = la;
+          this._runtime.IsPixelRoundingEnabled() && (t2 = e.PixelRoundQuad(t2)), n.CalculateTransformedMesh(e.GetSourceMesh(), t2, this._currentQuadTex), e.SetMeshChanged(false);
+        }
+        n.Draw(t);
+      }
+      GetAnimationTime() {
+        return this._animationTimer.Get();
+      }
+      IsAnimationPlaying() {
+        return this._inst.GetFlag(oa);
+      }
+      SetAnimationPlaying(t) {
+        this._inst.SetFlag(oa, t);
+      }
+      IsPlayingForwards() {
+        return this._inst.GetFlag(na);
+      }
+      SetPlayingForwards(t) {
+        this._inst.SetFlag(na, t);
+      }
+      IsInAnimationTrigger() {
+        return this._inst.GetFlag(pa);
+      }
+      SetInAnimationTrigger(t) {
+        this._inst.SetFlag(pa, t);
+      }
+      Tick() {
+        this._changeAnimationName && this._DoChangeAnimation(), 0 <= this._changeAnimFrameIndex && this._DoChangeAnimFrame();
+        const t = this._currentAnimationSpeed;
+        if (this.IsAnimationPlaying() && 0 !== t) {
+          const e = this._runtime.GetDt(this._inst), n = (this._animationTimer.Add(e), this.GetAnimationTime()), i = this._currentAnimationFrame, r = i.GetDuration() / t;
+          if (!(n < this._frameStartTime + r)) {
+            const a = this._currentAnimation, s = this._currentAnimationRepeatTo, o = a.GetFrameCount(), m = a.GetRepeatCount(), h = a.IsLooping(), u = a.IsPingPong(), c = (this.IsPlayingForwards() ? this._currentFrameIndex++ : this._currentFrameIndex--, this._frameStartTime += r, this._currentFrameIndex >= o && (u ? (this.SetPlayingForwards(false), this._currentFrameIndex = o - 2) : !h && (this._animationRepeats++, this._animationRepeats >= m) ? this._FinishAnimation(false) : this._currentFrameIndex = s), this._currentFrameIndex < 0 && (u ? (this._currentFrameIndex = 1, this.SetPlayingForwards(true), h || (this._animationRepeats++, this._animationRepeats >= m && this._FinishAnimation(true))) : !h && (this._animationRepeats++, this._animationRepeats >= m) ? this._FinishAnimation(true) : this._currentFrameIndex = s), this._currentFrameIndex = ea.clamp(this._currentFrameIndex, 0, o - 1), a.GetFrameAt(this._currentFrameIndex));
+            n > this._frameStartTime + c.GetDuration() / t && (this._frameStartTime = n), this._OnFrameChanged(i, c);
+          }
+        } else this._StopTicking();
+      }
+      _FinishAnimation(t) {
+        this._currentFrameIndex = t ? 0 : this._currentAnimation.GetFrameCount() - 1, this.SetAnimationPlaying(false), this._animTriggerName = this._currentAnimation.GetName(), this.SetInAnimationTrigger(true), this.DispatchScriptEvent("animationend", false, { animationName: this._animTriggerName }), this.Trigger(ea.Plugins.Sprite.Cnds.OnAnyAnimFinished), this.Trigger(ea.Plugins.Sprite.Cnds.OnAnimFinished), this.SetInAnimationTrigger(false), this._animationRepeats = 0;
+      }
+      _OnFrameChanged(n, i, t) {
+        if (n !== i) {
+          const e = this.GetWorldInfo(), r = n.GetImageInfo(), a = i.GetImageInfo(), s = r.GetWidth(), o = r.GetHeight(), m = a.GetWidth(), h = a.GetHeight(), u = (t && t.onFrameChange ? t.onFrameChange(e, s, o, m, h) : (s !== m && e.SetWidth(e.GetWidth() * (m / s)), o !== h && e.SetHeight(e.GetHeight() * (h / o))), e.SetOriginX(i.GetOriginX()), e.SetOriginY(i.GetOriginY()), e.SetSourceCollisionPoly(i.GetCollisionPoly()), e.SetBboxChanged(), this._currentAnimationFrame = i, this._currentTexture = a.GetTexture(), this._currentRcTex = a.GetTexRect(), this._currentQuadTex = a.GetTexQuad(), this.GetInstance().GetBehaviorInstances());
+          for (let t2 = 0, e2 = u.length; t2 < e2; ++t2) u[t2].OnSpriteFrameChanged(n, i);
+          this.DispatchScriptEvent("framechange", false, { animationName: this._currentAnimation.GetName(), animationFrame: this._currentFrameIndex }), this.Trigger(ea.Plugins.Sprite.Cnds.OnFrameChanged), this._runtime.UpdateRender();
+        }
+      }
+      _StartAnim(t) {
+        this.SetAnimationPlaying(true), this._frameStartTime = this.GetAnimationTime(), 1 === t && 0 !== this._currentFrameIndex && (this._changeAnimFrameIndex = 0, this.IsInAnimationTrigger() || this._DoChangeAnimFrame()), this._StartTicking();
+      }
+      _SetAnim(t, e, n) {
+        this._changeAnimationName = t, this._changeAnimationFrom = e, this._StartTicking(), !n && this.IsInAnimationTrigger() || this._DoChangeAnimation();
+      }
+      _GetCurrentAnimation() {
+        return this._currentAnimation;
+      }
+      _GetCurrentAnimationName() {
+        return this._changeAnimationName || this._currentAnimation.GetName();
+      }
+      _OnAnimationRemoved(t) {
+        ea.equalsNoCase(t, this._GetCurrentAnimationName()) && this._SetAnim(this._objectClass.GetFirstAnimation().GetName(), 1, true);
+      }
+      _SetAnimFrame(t) {
+        if ("string" == typeof t) if (String(Number(t)) === t) t = Number(t);
+        else {
+          const e = this._objectClass.GetAnimationByName(this._GetCurrentAnimationName());
+          if (!e) return;
+          if (-1 === (t = e.GetFrameIndexByTag(t))) return;
+        }
+        isFinite(t) && (this._changeAnimFrameIndex = t, this.IsInAnimationTrigger() || this._DoChangeAnimFrame());
+      }
+      _OnAnimationFramesChanged() {
+        if (!this._changeAnimationName && -1 === this._changeAnimFrameIndex) {
+          const t = this._currentAnimationFrame, e = this._currentAnimation.GetFrameAt(ea.clamp(this._currentFrameIndex, 0, this._currentAnimation.GetFrameCount() - 1));
+          t !== e && this._OnFrameChanged(t, e), 1 < this._currentAnimation.GetFrameCount() && 0 < this._currentAnimationSpeed && this._StartTicking();
+        }
+      }
+      _GetAnimFrame() {
+        return this._currentFrameIndex;
+      }
+      _GetAnimFrameTag() {
+        return this._currentAnimationFrame.GetTag();
+      }
+      _SetAnimSpeed(t) {
+        this._currentAnimationSpeed = Math.abs(t), this.SetPlayingForwards(0 <= t), 0 < this._currentAnimationSpeed && this._StartTicking();
+      }
+      _GetAnimSpeed() {
+        return this.IsPlayingForwards() ? this._currentAnimationSpeed : -this._currentAnimationSpeed;
+      }
+      _SetAnimRepeatToFrame(t) {
+        "string" == typeof t && -1 === (t = this._currentAnimation.GetFrameIndexByTag(t)) || (t = ea.clamp(Math.floor(t), 0, this._currentAnimation.GetFrameCount() - 1), this._currentAnimationRepeatTo = t);
+      }
+      _GetAnimRepeatToFrame() {
+        return this._currentAnimationRepeatTo;
+      }
+      _DoChangeAnimation(t) {
+        const e = this._currentAnimationFrame, n = this._objectClass.GetAnimationByName(this._changeAnimationName);
+        if (this._changeAnimationName = "", n && (n !== this._currentAnimation || !this.IsAnimationPlaying())) {
+          this._currentAnimation = n, this.SetPlayingForwards(0 <= n.GetSpeed()), this._currentAnimationSpeed = Math.abs(n.GetSpeed()), this._currentAnimationRepeatTo = n.GetRepeatTo(), this._currentFrameIndex = ea.clamp(this._currentFrameIndex, 0, this._currentAnimation.GetFrameCount() - 1), 1 === this._changeAnimationFrom && (this._currentFrameIndex = 0), this.SetAnimationPlaying(true), this._frameStartTime = this.GetAnimationTime();
+          const i = this._currentAnimation.GetFrameAt(this._currentFrameIndex);
+          this._OnFrameChanged(e, i, t);
+        }
+      }
+      _DoChangeAnimFrame(t) {
+        const e = this._currentAnimationFrame, n = this._currentFrameIndex;
+        if (this._currentFrameIndex = ea.clamp(Math.floor(this._changeAnimFrameIndex), 0, this._currentAnimation.GetFrameCount() - 1), this._changeAnimFrameIndex = -1, t || n !== this._currentFrameIndex) {
+          const i = this._currentAnimation.GetFrameAt(this._currentFrameIndex);
+          this._OnFrameChanged(e, i), this._frameStartTime = this.GetAnimationTime();
+        }
+      }
+      _UpdateCurrentTexture() {
+        const t = this._currentAnimationFrame.GetImageInfo();
+        this._currentTexture = t.GetTexture(), this._currentRcTex = t.GetTexRect(), this._currentQuadTex = t.GetTexQuad(), this.GetWorldInfo().SetMeshChanged(true);
+      }
+      GetTexture() {
+        return this._currentTexture;
+      }
+      GetTexRect() {
+        return this._currentRcTex;
+      }
+      GetTexQuad() {
+        return this._currentQuadTex;
+      }
+      GetImagePointCount() {
+        return this._currentAnimationFrame.GetImagePointCount();
+      }
+      GetImagePoint(t) {
+        const e = this._currentAnimationFrame, n = this.GetWorldInfo();
+        let i = null;
+        if ("string" == typeof t) i = e.GetImagePointByName(t);
+        else {
+          if ("number" != typeof t) throw new TypeError("expected string or number");
+          i = e.GetImagePointByIndex(t - 1);
+        }
+        let r = n.GetTotalZElevation();
+        if (!i) return [n.GetX(), n.GetY(), r];
+        if (ma.copy(i.GetVec2()), n.HasMesh()) {
+          const [a, s, o] = n.GetSourceMesh().TransformPoint(ma.getX(), ma.getY());
+          ma.set(a, s), r += o;
+        }
+        return ma.offset(-e.GetOriginX(), -e.GetOriginY()), ma.scale(n.GetWidth(), n.GetHeight()), ma.rotate(n.GetAngle()), ma.offset(n.GetX(), n.GetY()), [ma.getX(), ma.getY(), r];
+      }
+      GetCollisionPolyPointCount() {
+        return this.GetWorldInfo().GetTransformedCollisionPoly().pointCount();
+      }
+      GetCollisionPolyPoint(t) {
+        t = Math.floor(t);
+        const e = this.GetWorldInfo(), n = e.GetTransformedCollisionPoly(), i = n.pointCount();
+        if ((t = t === i ? 0 : t) < 0 || i <= t) return [0, 0];
+        const r = n.pointsArr();
+        return [r[2 * t + 0] + e.GetX(), r[2 * t + 1] + e.GetY()];
+      }
+      GetDebuggerProperties() {
+        const e = ea.Plugins.Sprite.Acts, t = "plugins.sprite.debugger.animation-properties";
+        return [{ title: t + ".title", properties: [{ name: t + ".current-animation", value: this._currentAnimation.GetName(), onedit: (t2) => this.CallAction(e.SetAnim, t2, 0) }, { name: t + ".current-frame", value: this._currentFrameIndex, onedit: (t2) => this.CallAction(e.SetAnimFrame, t2) }, { name: t + ".is-playing", value: this.IsAnimationPlaying(), onedit: (t2) => t2 ? this.CallAction(e.StartAnim, 0) : this.CallAction(e.StopAnim) }, { name: t + ".speed", value: this._currentAnimationSpeed, onedit: (t2) => this.CallAction(e.SetAnimSpeed, t2) }, { name: t + ".repeats", value: this._animationRepeats, onedit: (t2) => this._animationRepeats = t2 }] }];
+      }
+      SaveToJson() {
+        const t = { "a": this._currentAnimation.GetSID() }, e = (0 !== this._frameStartTime && (t["fs"] = this._frameStartTime), this.GetAnimationTime()), n = (0 !== e && (t["at"] = e), 0 !== this._currentFrameIndex && (t["f"] = this._currentFrameIndex), 0 !== this._currentAnimationSpeed && (t["cas"] = this._currentAnimationSpeed), 1 !== this._animationRepeats && (t["ar"] = this._animationRepeats), 0 !== this._currentAnimationRepeatTo && (t["rt"] = this._currentAnimationRepeatTo), this.IsAnimationPlaying() || (t["ap"] = this.IsAnimationPlaying()), this.IsPlayingForwards() || (t["af"] = this.IsPlayingForwards()), this.GetWorldInfo());
+        return n.IsCollisionEnabled() && (t["ce"] = n.IsCollisionEnabled()), t;
+      }
+      LoadFromJson(t) {
+        const e = this.GetObjectClass().GetAnimationBySID(t["a"]), n = (e && (this._currentAnimation = e), this._frameStartTime = t.hasOwnProperty("fs") ? t["fs"] : 0, this._animationTimer.Set(t.hasOwnProperty("at") ? t["at"] : 0), t.hasOwnProperty("f") ? t["f"] : 0), i = (this._currentFrameIndex = ea.clamp(n, 0, this._currentAnimation.GetFrameCount() - 1), this._currentAnimationSpeed = t.hasOwnProperty("cas") ? t["cas"] : 0, this._animationRepeats = t.hasOwnProperty("ar") ? t["ar"] : 1, t.hasOwnProperty("rt") ? t["rt"] : 0), r = (this._currentAnimationRepeatTo = ea.clamp(i, 0, this._currentAnimation.GetFrameCount() - 1), this.SetAnimationPlaying(!t.hasOwnProperty("ap") || !!t["ap"]), this.SetPlayingForwards(!t.hasOwnProperty("af") || !!t["af"]), this._currentAnimation.GetFrameAt(this._currentFrameIndex)), a = (this._currentAnimationFrame = r, this._UpdateCurrentTexture(), this.GetWorldInfo());
+        a.SetOriginX(r.GetOriginX()), a.SetOriginY(r.GetOriginY()), a.SetSourceCollisionPoly(r.GetCollisionPoly()), a.SetCollisionEnabled(!!t["ce"]), this.IsAnimationPlaying() && this._StartTicking();
+      }
+      GetPropertyValueByIndex(t) {
+        const e = this.GetWorldInfo();
+        switch (t) {
+          case ja:
+            return e.IsCollisionEnabled();
+          case ia:
+            return ea.clamp(this._currentFrameIndex, 0, this._currentAnimation.GetFrameCount() - 1);
+          case ha:
+            return this._currentAnimation.GetName();
+        }
+      }
+      SetPropertyValueByIndex(t, e, n) {
+        const i = this.GetWorldInfo();
+        switch (t) {
+          case ja:
+            i.SetCollisionEnabled(!!e);
+            break;
+          case ia: {
+            this.SetAnimationPlaying(false);
+            const r = this._currentAnimation.GetFrameCount() - 1, a = e = ea.clamp(e, 0, r), s = this._currentAnimation.GetFrameAt(this._currentFrameIndex), o = this._currentAnimation.GetFrameAt(a);
+            this._OnFrameChanged(s, o, n), this._currentFrameIndex = ea.clamp(a, 0, r);
+            break;
+          }
+          case ha: {
+            this._changeAnimationName = e, this._DoChangeAnimation(n);
+            const m = this._currentAnimation.GetFrameCount();
+            1 < m && 0 < this._currentAnimation.GetSpeed() ? this._StartTicking() : this._StopTicking();
+            break;
+          }
+        }
+      }
+      GetScriptInterfaceClass() {
+        return self.ISpriteInstance;
+      }
+    }, /* @__PURE__ */ new WeakMap()), ra = /* @__PURE__ */ new Map([["current-frame", 0], ["beginning", 1]]);
+    self.ISpriteInstance = class extends self.IWorldInstance {
+      constructor() {
+        super(), qa.set(this, self.IInstance._GetInitInst().GetSdkInstance());
+      }
+      getImagePointCount() {
+        return qa.get(this).GetImagePointCount();
+      }
+      getImagePointX(t) {
+        return this.getImagePoint(t)[0];
+      }
+      getImagePointY(t) {
+        return this.getImagePoint(t)[1];
+      }
+      getImagePointZ(t) {
+        return this.getImagePoint(t)[2];
+      }
+      getImagePoint(t) {
+        if ("string" != typeof t && "number" != typeof t) throw new TypeError("expected string or number");
+        return qa.get(this).GetImagePoint(t);
+      }
+      getPolyPointCount() {
+        return qa.get(this).GetCollisionPolyPointCount();
+      }
+      getPolyPointX(t) {
+        return fa.RequireFiniteNumber(t), qa.get(this).GetCollisionPolyPoint(t)[0];
+      }
+      getPolyPointY(t) {
+        return fa.RequireFiniteNumber(t), qa.get(this).GetCollisionPolyPoint(t)[1];
+      }
+      getPolyPoint(t) {
+        return fa.RequireFiniteNumber(t), qa.get(this).GetCollisionPolyPoint(t);
+      }
+      stopAnimation() {
+        qa.get(this).SetAnimationPlaying(false);
+      }
+      startAnimation(t = "current-frame") {
+        fa.RequireString(t);
+        const e = ra.get(t);
+        if (void 0 === e) throw new Error("invalid mode");
+        qa.get(this)._StartAnim(e);
+      }
+      setAnimation(t, e = "beginning") {
+        fa.RequireString(t), fa.RequireString(e);
+        const n = ra.get(e);
+        if (void 0 === n) throw new Error("invalid mode");
+        const i = qa.get(this);
+        if (!i.GetObjectClass().GetAnimationByName(t)) throw new Error(`animation name "${t}" does not exist`);
+        i._SetAnim(t, n);
+      }
+      getAnimation(t) {
+        fa.RequireString(t);
+        const e = qa.get(this).GetObjectClass().GetAnimationByName(t);
+        return e ? e.GetIAnimation() : null;
+      }
+      get animation() {
+        return qa.get(this)._GetCurrentAnimation().GetIAnimation();
+      }
+      get animationName() {
+        return qa.get(this)._GetCurrentAnimationName();
+      }
+      set animationFrame(t) {
+        fa.RequireFiniteNumber(t), qa.get(this)._SetAnimFrame(t);
+      }
+      get animationFrame() {
+        return qa.get(this)._GetAnimFrame();
+      }
+      set animationFrameTag(t) {
+        fa.RequireString(t), qa.get(this)._SetAnimFrame(t);
+      }
+      get animationFrameTag() {
+        return qa.get(this)._GetAnimFrameTag();
+      }
+      set animationSpeed(t) {
+        fa.RequireFiniteNumber(t), qa.get(this)._SetAnimSpeed(t);
+      }
+      get animationSpeed() {
+        return qa.get(this)._GetAnimSpeed();
+      }
+      set animationRepeatToFrame(t) {
+        fa.RequireFiniteNumber(t), qa.get(this)._SetAnimRepeatToFrame(t);
+      }
+      get animationRepeatToFrame() {
+        return qa.get(this)._GetAnimRepeatToFrame();
+      }
+      get imageWidth() {
+        return qa.get(this).GetCurrentImageInfo().GetWidth();
+      }
+      get imageHeight() {
+        return qa.get(this).GetCurrentImageInfo().GetHeight();
+      }
+      getImageSize() {
+        const t = qa.get(this).GetCurrentImageInfo();
+        return [t.GetWidth(), t.GetHeight()];
+      }
+      async replaceCurrentAnimationFrame(t) {
+        fa.RequireInstanceOf(t, Blob);
+        const e = qa.get(this), n = e.GetRuntime(), i = e.GetCurrentImageInfo(), r = ea.New(ea.ImageInfo);
+        if (r.LoadDynamicBlobAsset(n, t), await r.LoadStaticTexture(n.GetRenderer(), { sampling: n.GetSampling() }), e.WasReleased()) r.Release();
+        else {
+          i.ReplaceWith(r);
+          const a = e.GetSdkType();
+          a._UpdateAllCurrentTexture(), a.GetObjectClass().Dispatcher().dispatchEvent(new ea.Event("animationframeimagechange")), n.UpdateRender();
+        }
+      }
+      setSolidCollisionFilter(t, e) {
+        fa.RequireString(e), qa.get(this).GetWorldInfo().SetSolidCollisionFilter(!!t, e);
+      }
+    };
+  }
+  {
+    const Vb = self.C3;
+    Vb.Plugins.Sprite.Cnds = { IsAnimPlaying(t) {
+      return Vb.equalsNoCase(this._GetCurrentAnimationName(), t);
+    }, CompareFrame(t, e) {
+      return Vb.compare(this._currentFrameIndex, t, e);
+    }, CompareFrameTag(t, e) {
+      if ("string" != typeof e) return false;
+      const n = this._currentAnimationFrame.GetTag();
+      return Vb.compare(n.toLowerCase(), t, e.toLowerCase());
+    }, CompareAnimSpeed(t, e) {
+      return Vb.compare(this._GetAnimSpeed(), t, e);
+    }, OnAnimFinished(t) {
+      return Vb.equalsNoCase(this._animTriggerName, t);
+    }, OnAnyAnimFinished() {
+      return true;
+    }, OnFrameChanged() {
+      return true;
+    }, IsMirrored() {
+      return this.GetWorldInfo().GetWidth() < 0;
+    }, IsFlipped() {
+      return this.GetWorldInfo().GetHeight() < 0;
+    }, OnURLLoaded() {
+      return true;
+    }, OnURLFailed() {
+      return true;
+    }, IsCollisionEnabled() {
+      return this.GetWorldInfo().IsCollisionEnabled();
+    } };
+  }
+  {
+    const d1 = self.C3;
+    d1.Plugins.Sprite.Acts = { Spawn(t, e, n, i, r) {
+      if (t && e) {
+        const [a, s] = this.GetImagePoint(n), o = this._runtime.CreateInstance(t, e, a, s, i, r);
+        if (o) {
+          if (i && e.SortAndAddInstancesByZIndex(o), t.GetPlugin().IsRotatable()) {
+            const h = o.GetWorldInfo();
+            h.SetAngle(this.GetWorldInfo().GetAngle()), h.SetBboxChanged();
+          }
+          const m = this._runtime.GetEventSheetManager();
+          m.BlockFlushingInstances(true), o._TriggerOnCreatedOnSelfAndRelated(), m.BlockFlushingInstances(false), t !== this._runtime.GetCurrentAction().GetObjectClass() && this._sdkType._SpawnPickInstance(t, o, i);
+        }
+      }
+    }, StopAnim() {
+      this.SetAnimationPlaying(false);
+    }, StartAnim(t) {
+      this._StartAnim(t);
+    }, SetAnim(t, e) {
+      this._SetAnim(t, e);
+    }, SetAnimFrame(t) {
+      this._SetAnimFrame(t);
+    }, SetAnimSpeed(t) {
+      this._SetAnimSpeed(t);
+    }, SetAnimRepeatToFrame(t) {
+      this._SetAnimRepeatToFrame(t);
+    }, AddRemoveAnimation(e, t) {
+      try {
+        0 === e ? this.GetSdkType()._AddAnimation(t) : this.GetSdkType()._RemoveAnimation(t);
+      } catch (t2) {
+        console.error(`[Construct] Error ${0 === e ? "adding" : "removing"} animation: `, t2);
+      }
+    }, AddRemoveAnimationFrame(e, t, n) {
+      try {
+        0 === e ? this.GetSdkType()._AddAnimationFrame(t, n) : this.GetSdkType()._RemoveAnimationFrame(t, n);
+      } catch (t2) {
+        console.error(`[Construct] Error ${0 === e ? "adding" : "removing"} animation frame: `, t2);
+      }
+    }, SetMirrored(t) {
+      const e = this.GetWorldInfo(), n = e.GetWidth(), i = Math.abs(n) * (0 === t ? -1 : 1);
+      n !== i && (e.SetWidth(i), e.SetBboxChanged());
+    }, SetFlipped(t) {
+      const e = this.GetWorldInfo(), n = e.GetHeight(), i = Math.abs(n) * (0 === t ? -1 : 1);
+      n !== i && (e.SetHeight(i), e.SetBboxChanged());
+    }, SetScale(t) {
+      const e = this._currentAnimationFrame, n = e.GetImageInfo(), i = this.GetWorldInfo(), r = i.GetWidth() < 0 ? -1 : 1, a = i.GetHeight() < 0 ? -1 : 1, s = n.GetWidth() * t * r, o = n.GetHeight() * t * a;
+      i.GetWidth() === s && i.GetHeight() === o || (i.SetSize(s, o), i.SetBboxChanged());
+    }, async LoadURL(t, e, n) {
+      const i = this._currentAnimationFrame, r = i.GetImageInfo(), a = this.GetWorldInfo(), s = this._runtime, o = this._sdkType;
+      if (r.GetURL() === t) 0 === e && (a.SetSize(r.GetWidth(), r.GetHeight()), a.SetBboxChanged()), this.Trigger(d1.Plugins.Sprite.Cnds.OnURLLoaded);
+      else {
+        const m = d1.New(d1.ImageInfo);
+        try {
+          if (await m.LoadDynamicAsset(s, t), !m.IsLoaded()) throw new Error("image failed to load");
+          if (this.WasReleased()) return void m.Release();
+          await m.LoadStaticTexture(s.GetRenderer(), { sampling: s.GetSampling() });
+        } catch (t2) {
+          return console.error("Load image from URL failed: ", t2), void (this.WasReleased() || this.Trigger(d1.Plugins.Sprite.Cnds.OnURLFailed));
+        }
+        this.WasReleased() ? m.Release() : (r.ReplaceWith(m), o._UpdateAllCurrentTexture(), o.GetObjectClass().Dispatcher().dispatchEvent(new d1.Event("animationframeimagechange")), s.UpdateRender(), 0 === e && (a.SetSize(r.GetWidth(), r.GetHeight()), a.SetBboxChanged()), await this.TriggerAsync(d1.Plugins.Sprite.Cnds.OnURLLoaded));
+      }
+    }, SetCollisions(t) {
+      this.GetWorldInfo().SetCollisionEnabled(t);
+    }, SetSolidCollisionFilter(t, e) {
+      this.GetWorldInfo().SetSolidCollisionFilter(0 === t, e);
+    }, SetEffect(t) {
+      this.GetWorldInfo().SetBlendMode(t), this._runtime.UpdateRender();
+    } };
+  }
+  {
+    const dc = self.C3;
+    dc.Plugins.Sprite.Exps = { AnimationFrame() {
+      return this._GetAnimFrame();
+    }, AnimationFrameTag() {
+      return this._GetAnimFrameTag();
+    }, AnimationFrameCount() {
+      return this._currentAnimation.GetFrameCount();
+    }, AnimationName() {
+      return this._currentAnimation.GetName();
+    }, AnimationSpeed() {
+      return this._GetAnimSpeed();
+    }, OriginalAnimationSpeed() {
+      return this._currentAnimation.GetSpeed();
+    }, ImagePointX(t) {
+      return this.GetImagePoint(t)[0];
+    }, ImagePointY(t) {
+      return this.GetImagePoint(t)[1];
+    }, ImagePointZ(t) {
+      return this.GetImagePoint(t)[2];
+    }, ImagePointCount() {
+      return this.GetImagePointCount();
+    }, ImageWidth() {
+      return this.GetCurrentImageInfo().GetWidth();
+    }, ImageHeight() {
+      return this.GetCurrentImageInfo().GetHeight();
+    }, PolyPointXAt(t) {
+      return this.GetCollisionPolyPoint(t)[0];
+    }, PolyPointYAt(t) {
+      return this.GetCollisionPolyPoint(t)[1];
+    }, PolyPointCount() {
+      return this.GetCollisionPolyPointCount();
+    } };
+  }
 }
 {
   {
@@ -30915,6 +31339,776 @@ var GetTouchSdkInstance2;
   }
 }
 {
+  {
+    const a = self.C3, b = [];
+    a.Plugins.Audio = class extends a.SDKPluginBase {
+      constructor(t) {
+        super(t);
+      }
+      _AddActionPromise(t) {
+        b.push(t);
+      }
+      static async WaitForAllActionPromises() {
+        await Promise.all(b), a.clearArray(b);
+      }
+      Release() {
+        super.Release();
+      }
+    };
+  }
+  {
+    let GetAudioSdkInstance = function() {
+      return e.GetSingleGlobalInstance().GetSdkInstance();
+    }, GetAudioDOMInterface = function() {
+      if (self["C3Audio_DOMInterface"]) return self["C3Audio_DOMInterface"];
+      throw new Error("audio scripting API cannot be used here - make sure the project is using DOM mode, not worker mode");
+    };
+    GetAudioSdkInstance2 = GetAudioSdkInstance, GetAudioDOMInterface2 = GetAudioDOMInterface;
+    const f = self.C3, g = self.C3X;
+    f.Plugins.Audio.Type = class extends f.SDKTypeBase {
+      constructor(t) {
+        super(t);
+      }
+      Release() {
+        super.Release();
+      }
+      OnCreate() {
+      }
+      GetScriptInterfaceClass() {
+        return self.IAudioObjectType;
+      }
+    };
+    let e = null;
+    self.IAudioObjectType = class extends self.IObjectClass {
+      constructor(t) {
+        super(t), e = t;
+      }
+      get audioContext() {
+        return GetAudioDOMInterface()["GetAudioContextExtern"]();
+      }
+      get destinationNode() {
+        return GetAudioDOMInterface()["GetDestinationNodeExtern"]();
+      }
+      get isSilent() {
+        return GetAudioSdkInstance()._IsSilent();
+      }
+      set isSilent(t) {
+        GetAudioSdkInstance()._SetSilent(t);
+      }
+      get masterVolume() {
+        return GetAudioSdkInstance()._GetMasterVolume();
+      }
+      set masterVolume(t) {
+        g.RequireFiniteNumber(t), GetAudioSdkInstance()._SetMasterVolume(t);
+      }
+      stopAll() {
+        GetAudioSdkInstance()._StopAll();
+      }
+    };
+  }
+  {
+    const o = self.C3, p = "audio", q = ["interactive", "balanced", "playback"];
+    o.Plugins.Audio.Instance = class extends o.SDKInstanceBase {
+      constructor(t, e) {
+        super(t, p), this._nextPlayTime = 0, this._triggerTags = [], this._enableMultiTags = true, this._timeScaleMode = 0, this._saveLoadMode = 0, this._playInBackground = false, this._panningModel = 1, this._distanceModel = 1, this._listenerPos = [this._runtime.GetViewportWidth() / 2, this._runtime.GetViewportHeight() / 2, 600], this._listenerForwardVec = [0, 0, -1], this._listenerUpVec = [0, 1, 0], this._referenceDistance = 600, this._maxDistance = 1e4, this._rolloffFactor = 1, this._listenerInst = null, this._loadListenerUid = -1, this._masterVolume = 1, this._isSilent = false, this._sampleRate = 0, this._audioContextState = "suspended", this._outputLatency = 0, this._effectCount = /* @__PURE__ */ new Map(), this._preloadTotal = 0, this._preloadCount = 0, this._bufferMetadata = /* @__PURE__ */ new Map(), this._remoteUrls = /* @__PURE__ */ new Map();
+        let s = "interactive";
+        e && (this._timeScaleMode = e[0], this._saveLoadMode = e[1], this._playInBackground = e[2], s = q[e[3]], this._enableMultiTags = e[4], this._panningModel = e[5], this._distanceModel = e[6], this._listenerPos[2] = e[7], this._referenceDistance = e[8], this._maxDistance = e[9], this._rolloffFactor = e[10]), this._lastAIState = [], this._lastFxState = [], this._lastAnalysersData = [], this.AddDOMMessageHandlers([["state", (t2) => this._OnUpdateState(t2)], ["audiocontext-state", (t2) => this._OnAudioContextStateChanged(t2)], ["fxstate", (t2) => this._OnUpdateFxState(t2)], ["trigger", (t2) => this._OnTrigger(t2)], ["buffer-metadata", (t2) => this._OnBufferMetadata(t2)]]);
+        const i = this.GetRuntime().Dispatcher(), a = (this._disposables = new o.CompositeDisposable(o.Disposable.From(i, "instancedestroy", (t2) => this._OnInstanceDestroyed(t2.instance)), o.Disposable.From(i, "afterload", () => this._OnAfterLoad()), o.Disposable.From(i, "suspend", () => this._OnSuspend()), o.Disposable.From(i, "resume", () => this._OnResume())), "Safari" === o.Platform.Browser), n = this._runtime.IsiOSWebView(), r = this._runtime.GetAssetManager().IsFileProtocol(), l = "playable-ad-single-file" === this._runtime.GetExportType(), h = a || n || r || l;
+        this._runtime.AddLoadPromise(this.PostToDOMAsync("create-audio-context", { "preloadList": this._runtime.GetAssetManager().GetAudioToPreload().map((t2) => ({ "originalUrl": t2.originalUrl, "url": t2.url, "type": t2.type, "fileSize": t2.fileSize })), "timeScaleMode": this._timeScaleMode, "latencyHint": s, "panningModel": this._panningModel, "distanceModel": this._distanceModel, "refDistance": this._referenceDistance, "maxDistance": this._maxDistance, "rolloffFactor": this._rolloffFactor, "listenerPos": this._listenerPos, "usePlayMusicAsSoundWorkaround": h }).then((t2) => {
+          this._sampleRate = t2["sampleRate"], this._audioContextState = t2["audioContextState"], this._outputLatency = t2["outputLatency"];
+        })), this._StartTicking();
+      }
+      Release() {
+        this._listenerInst = null, super.Release();
+      }
+      _SplitTags(t) {
+        return this._enableMultiTags ? t.split(" ").filter((t2) => !!t2) : t ? [t] : [];
+      }
+      _MatchTagLists(e, t) {
+        for (const s of t) {
+          let t2 = false;
+          for (const i of e) if (o.equalsNoCase(i, s)) {
+            t2 = true;
+            break;
+          }
+          if (!t2) return false;
+        }
+        return true;
+      }
+      _MatchTagListToStr(t, e) {
+        return this._MatchTagLists(t, this._SplitTags(e));
+      }
+      _AddActionPromise(t) {
+        this.GetPlugin()._AddActionPromise(t);
+      }
+      _OnInstanceDestroyed(t) {
+        this._listenerInst === t && (this._listenerInst = null);
+      }
+      DbToLinearNoCap(t) {
+        return Math.pow(10, t / 20);
+      }
+      DbToLinear(t) {
+        const e = this.DbToLinearNoCap(t);
+        return isFinite(e) ? Math.max(Math.min(e, 1), 0) : 0;
+      }
+      LinearToDbNoCap(t) {
+        return Math.log(t) / Math.log(10) * 20;
+      }
+      LinearToDb(t) {
+        return this.LinearToDbNoCap(Math.max(Math.min(t, 1), 0));
+      }
+      _OnSuspend() {
+        this._playInBackground || this.PostToDOM("set-suspended", { "isSuspended": true });
+      }
+      _OnResume() {
+        this._playInBackground || this.PostToDOM("set-suspended", { "isSuspended": false });
+      }
+      _OnUpdateState(t) {
+        const e = t["tickCount"], s = (this._outputLatency = t["outputLatency"], this._lastAIState.filter((t2) => t2.hasOwnProperty("placeholder") && (t2["placeholder"] > e || -1 === t2["placeholder"])));
+        this._lastAIState = t["audioInstances"], this._lastAnalysersData = t["analysers"], 0 < s.length && o.appendArray(this._lastAIState, s);
+      }
+      _OnBufferMetadata(t) {
+        this._bufferMetadata.set(t["originalUrl"], { duration: t["duration"] });
+      }
+      _OnAudioContextStateChanged(t) {
+        this._audioContextState = t["audioContextState"];
+      }
+      GetAudioContextState() {
+        return this._runtime.IsExportToVideo() ? "running" : this._audioContextState;
+      }
+      _OnUpdateFxState(t) {
+        this._lastFxState = t["fxstate"];
+      }
+      _GetFirstAudioStateByTags(t) {
+        const e = this._SplitTags(t);
+        for (const s of this._lastAIState) if (this._MatchTagLists(s["tags"], e)) return s;
+        return null;
+      }
+      _IsTagPlaying(t) {
+        const e = this._SplitTags(t);
+        return this._lastAIState.some((t2) => this._MatchTagLists(t2["tags"], e) && t2["isPlaying"]);
+      }
+      _MaybeMarkAsPlaying(t, e, s, i, a) {
+        if (this._IsTagPlaying(e)) return null;
+        const n = this._bufferMetadata.get(t), o2 = { "tags": this._SplitTags(e), "duration": n ? n.duration : 0, "volume": a, "isPlaying": true, "playbackTime": 0, "playbackRate": 1, "uid": -1, "bufferOriginalUrl": t, "bufferUrl": "", "bufferType": "", "isMusic": s, "isLooping": i, "isMuted": false, "resumePosition": 0, "pan": null, "placeholder": -1 };
+        return this._lastAIState.push(o2), o2;
+      }
+      _MaybeMarkAsStopped(t) {
+        const e = this._SplitTags(t);
+        for (const s of this._lastAIState) this._MatchTagLists(s["tags"], e) && (s["isPlaying"] = false);
+      }
+      async _OnTrigger(t) {
+        const e = t["type"], s = (this._triggerTags = t["tags"], t["aiid"]);
+        if ("ended" === e) {
+          for (const i of this._lastAIState) if (i["aiid"] === s) {
+            i["isPlaying"] = false;
+            break;
+          }
+          await this.TriggerAsync(o.Plugins.Audio.Cnds.OnEnded);
+        } else "fade-ended" === e && await this.TriggerAsync(o.Plugins.Audio.Cnds.OnFadeEnded);
+      }
+      _MatchTriggerTag(t) {
+        return this._MatchTagListToStr(this._triggerTags, t);
+      }
+      Tick() {
+        const t = { "timeScale": this._runtime.GetTimeScale(), "gameTime": this._runtime.GetGameTimeRaw(), "instPans": this.GetInstancePans(), "tickCount": this._runtime.GetTickCountNoSave() };
+        if (this._listenerInst) {
+          const e = this._listenerInst.GetWorldInfo();
+          this._listenerPos[0] = e.GetX(), this._listenerPos[1] = e.GetY(), t["listenerPos"] = this._listenerPos, t["listenerOrientation"] = [...this._listenerForwardVec, ...this._listenerUpVec];
+        }
+        this.PostToDOM("tick", t);
+      }
+      rotatePtAround(t, e, s, i, a) {
+        if (0 !== s) {
+          const n = Math.sin(s), o2 = Math.cos(s), r = (t -= i) * n, l = (e -= a) * n, h = t * o2, u = e * o2;
+          t = h - l, e = u + r, t += i, e += a;
+        }
+        return [t, e];
+      }
+      GetInstancePans() {
+        return this._lastAIState.filter((t) => -1 !== t["uid"]).map((t) => this._runtime.GetInstanceByUID(t["uid"])).filter((t) => t).map((t) => {
+          const e = t.GetWorldInfo(), s = e.GetLayer().GetAngle(), [i, a] = this.rotatePtAround(e.GetX(), e.GetY(), -s, this._listenerPos[0], this._listenerPos[1]);
+          return { "uid": t.GetUID(), "x": i, "y": a, "z": e.GetTotalZElevation(), "angle": e.GetAngle() - s };
+        });
+      }
+      GetAnalyserData(t, e) {
+        for (const s of this._lastAnalysersData) if (s.index === e && o.equalsNoCase(s["tag"], t)) return s;
+        return null;
+      }
+      _IncrementEffectCount(t) {
+        for (const e of this._SplitTags(t)) {
+          const s = e.toLowerCase();
+          this._effectCount.set(s, (this._effectCount.get(s) || 0) + 1);
+        }
+      }
+      _IsSilent() {
+        return this._isSilent;
+      }
+      _SetSilent(t) {
+        this._isSilent !== (t = !!t) && (this._isSilent = t, this.PostToDOM("set-silent", { "isSilent": t }));
+      }
+      _GetMasterVolume() {
+        return this._masterVolume;
+      }
+      _SetMasterVolume(t) {
+        this._masterVolume !== t && (this._masterVolume = t, this.PostToDOM("set-master-volume", { "vol": t }));
+      }
+      _StopAll() {
+        this.PostToDOM("stop-all");
+        for (const t of this._lastAIState) t["isPlaying"] = false;
+      }
+      _ShouldSave(t) {
+        return !t.hasOwnProperty("placeholder") && 3 !== this._saveLoadMode && !(t["isMusic"] && 1 === this._saveLoadMode || !t["isMusic"] && 2 === this._saveLoadMode);
+      }
+      SaveToJson() {
+        return { "isSilent": this._isSilent, "masterVolume": this._masterVolume, "listenerZ": this._listenerPos[2], "listenerForwardVec": this._listenerForwardVec, "listenerUpVec": this._listenerUpVec, "listenerUid": this._listenerInst ? this._listenerInst.GetUID() : -1, "remoteUrls": [...this._remoteUrls.entries()], "playing": this._lastAIState.filter((t) => this._ShouldSave(t)), "effects": this._lastFxState, "analysers": this._lastAnalysersData };
+      }
+      LoadFromJson(t) {
+        if (this._isSilent = t["isSilent"], this._masterVolume = t["masterVolume"], this._listenerPos[2] = t["listenerZ"], this._listenerInst = null, this._loadListenerUid = t["listenerUid"], t.hasOwnProperty("listenerForwardVec") ? this._listenerForwardVec = t["listenerForwardVec"] : this._listenerForwardVec = [0, 0, -1], t.hasOwnProperty("listenerUpVec") ? this._listenerUpVec = t["listenerUpVec"] : this._listenerUpVec = [0, 1, 0], this._remoteUrls.clear(), t["remoteUrls"]) for (const [e, s] of t["remoteUrls"]) this._remoteUrls.set(e, s);
+        this._lastAIState = t["playing"];
+        for (const i of this._lastAIState) i.hasOwnProperty("tag") && !i.hasOwnProperty("tags") && (i["tags"] = [i["tag"]].filter((t2) => !!t2));
+        this._lastFxState = t["effects"], this._lastAnalysersData = t["analysers"];
+      }
+      _OnAfterLoad() {
+        if (-1 !== this._loadListenerUid && (this._listenerInst = this._runtime.GetInstanceByUID(this._loadListenerUid), this._loadListenerUid = -1, this._listenerInst)) {
+          const t = this._listenerInst.GetWorldInfo();
+          this._listenerPos[0] = t.GetX(), this._listenerPos[1] = t.GetY();
+        }
+        for (const e of this._lastAIState) {
+          const s = this._runtime.GetAssetManager().GetProjectAudioFileUrl(e["bufferOriginalUrl"]);
+          s ? (e["bufferUrl"] = s.url, e["bufferType"] = s.type) : e["bufferUrl"] = null;
+        }
+        for (const i of Object.values(this._lastFxState)) for (const a of i) if (a.hasOwnProperty("bufferOriginalUrl")) {
+          const n = this._runtime.GetAssetManager().GetProjectAudioFileUrl(a["bufferOriginalUrl"]);
+          n && (a["bufferUrl"] = n.url, a["bufferType"] = n.type);
+        }
+        this.PostToDOM("load-state", { "saveLoadMode": this._saveLoadMode, "timeScale": this._runtime.GetTimeScale(), "gameTime": this._runtime.GetGameTimeRaw(), "listenerPos": this._listenerPos, "listenerOrientation": [...this._listenerForwardVec, ...this._listenerUpVec], "isSilent": this._isSilent, "masterVolume": this._masterVolume, "playing": this._lastAIState.filter((t) => null !== t["bufferUrl"]), "effects": this._lastFxState });
+      }
+      GetDebuggerProperties() {
+        const t = [];
+        for (const [s, i] of Object.entries(this._lastFxState)) t.push({ name: "$" + s, value: i.map((t2) => t2["type"]).join(", ") });
+        const e = "plugins.audio.debugger";
+        return [{ title: e + ".tag-effects", properties: t }, { title: e + ".currently-playing", properties: [{ name: e + ".currently-playing-count", value: this._lastAIState.length }, ...this._lastAIState.map((t2, e2) => ({ name: "$#" + e2, value: `${t2["bufferOriginalUrl"]} ("${t2["tags"]}") ${Math.round(10 * t2["playbackTime"]) / 10} / ` + Math.round(10 * t2["duration"]) / 10 }))] }];
+      }
+    };
+  }
+  {
+    const w0 = self.C3;
+    w0.Plugins.Audio.Cnds = { OnEnded(t) {
+      return this._MatchTriggerTag(t);
+    }, OnFadeEnded(t) {
+      return this._MatchTriggerTag(t);
+    }, PreloadsComplete() {
+      return this._preloadCount === this._preloadTotal;
+    }, AdvancedAudioSupported() {
+      return true;
+    }, IsSilent() {
+      return this._IsSilent();
+    }, IsAnyPlaying() {
+      for (const t of this._lastAIState) if (t["isPlaying"]) return true;
+      return false;
+    }, IsTagPlaying(t) {
+      return this._IsTagPlaying(t);
+    } };
+  }
+  {
+    const B0 = self.C3, C0 = ["lowpass", "highpass", "bandpass", "lowshelf", "highshelf", "peaking", "notch", "allpass"];
+    B0.Plugins.Audio.Acts = { Play(t, e, s, i, a) {
+      const n = B0.Plugins.Audio.Acts._DoPlay.call(this, t, e, s, i, a);
+      return this._AddActionPromise(n), n;
+    }, PlayFromTimeline(t, e, s, i) {
+      B0.Plugins.Audio.Acts._DoPlay.call(this, t, 0, e, 0, s, i);
+    }, async _DoPlay(t, e, s, i, a, n) {
+      if (!this._isSilent) {
+        const o = t[1], r = this._runtime.GetAssetManager().GetProjectAudioFileUrl(t[0]);
+        if (r) {
+          const l = this._nextPlayTime, h = (this._nextPlayTime = 0, this._MaybeMarkAsPlaying(t[0], a, o, 0 !== e, this.DbToLinear(s)));
+          try {
+            await this.PostToDOMAsync("play", { "originalUrl": t[0], "url": r.url, "type": r.type, "isMusic": o, "tags": this._SplitTags(a), "isLooping": 0 !== e, "vol": this.DbToLinear(s), "stereoPan": B0.clamp(i / 100, -1, 1), "pos": n || 0, "off": l, "trueClock": !!self["C3_GetAudioContextCurrentTime"] });
+          } finally {
+            h && (h["placeholder"] = this._runtime.GetTickCountNoSave());
+          }
+        }
+      }
+    }, async PlayAtPosition(t, e, s, i, a, n, o, r, l, h, u) {
+      if (!this._isSilent) {
+        const c = t[1], d = this._runtime.GetAssetManager().GetProjectAudioFileUrl(t[0]);
+        if (d) {
+          const _ = this._nextPlayTime, p = (this._nextPlayTime = 0, this._MaybeMarkAsPlaying(t[0], u, c, 0 !== e, this.DbToLinear(s)));
+          try {
+            await this.PostToDOMAsync("play", { "originalUrl": t[0], "url": d.url, "type": d.type, "isMusic": c, "tags": this._SplitTags(u), "isLooping": 0 !== e, "vol": this.DbToLinear(s), "pos": 0, "off": _, "trueClock": !!self["C3_GetAudioContextCurrentTime"], "panning": { "x": i, "y": a, "z": n, "angle": B0.toRadians(o), "innerAngle": B0.toRadians(r), "outerAngle": B0.toRadians(l), "outerGain": this.DbToLinear(h) } });
+          } finally {
+            p && (p["placeholder"] = this._runtime.GetTickCountNoSave());
+          }
+        }
+      }
+    }, async PlayAtObject(t, e, s, i, a, n, o, r) {
+      if (!this._isSilent && i) {
+        const l = i.GetFirstPicked();
+        if (l && l.GetWorldInfo()) {
+          const h = l.GetWorldInfo(), u = h.GetLayer().GetAngle(), [c, d] = this.rotatePtAround(h.GetX(), h.GetY(), -u, this._listenerPos[0], this._listenerPos[1]), _ = t[1], p = this._runtime.GetAssetManager().GetProjectAudioFileUrl(t[0]);
+          if (p) {
+            const f = this._nextPlayTime, g = (this._nextPlayTime = 0, this._MaybeMarkAsPlaying(t[0], r, _, 0 !== e, this.DbToLinear(s)));
+            try {
+              await this.PostToDOMAsync("play", { "originalUrl": t[0], "url": p.url, "type": p.type, "isMusic": _, "tags": this._SplitTags(r), "isLooping": 0 !== e, "vol": this.DbToLinear(s), "pos": 0, "off": f, "trueClock": !!self["C3_GetAudioContextCurrentTime"], "panning": { "x": c, "y": d, "z": h.GetTotalZElevation(), "angle": h.GetAngle() - u, "innerAngle": B0.toRadians(a), "outerAngle": B0.toRadians(n), "outerGain": this.DbToLinear(o), "uid": l.GetUID() } });
+            } finally {
+              g && (g["placeholder"] = this._runtime.GetTickCountNoSave());
+            }
+          }
+        }
+      }
+    }, async PlayByName(t, e, s, i, a, n) {
+      if (!this._isSilent) {
+        const o = 1 === t, r = this._runtime.GetAssetManager().GetProjectAudioFileUrl(e) || this._remoteUrls.get(e.toLowerCase());
+        if (r) {
+          const l = this._nextPlayTime, h = (this._nextPlayTime = 0, this._MaybeMarkAsPlaying(e, n, o, 0 !== s, this.DbToLinear(i)));
+          try {
+            await this.PostToDOMAsync("play", { "originalUrl": e, "url": r.url, "type": r.type, "isMusic": o, "tags": this._SplitTags(n), "isLooping": 0 !== s, "vol": this.DbToLinear(i), "stereoPan": B0.clamp(a / 100, -1, 1), "pos": 0, "off": l, "trueClock": !!self["C3_GetAudioContextCurrentTime"] });
+          } finally {
+            h && (h["placeholder"] = this._runtime.GetTickCountNoSave());
+          }
+        }
+      }
+    }, async PlayAtPositionByName(t, e, s, i, a, n, o, r, l, h, u, c) {
+      if (!this._isSilent) {
+        const d = 1 === t, _ = this._runtime.GetAssetManager().GetProjectAudioFileUrl(e) || this._remoteUrls.get(e.toLowerCase());
+        if (_) {
+          const p = this._nextPlayTime, f = (this._nextPlayTime = 0, this._MaybeMarkAsPlaying(e, c, d, 0 !== s, this.DbToLinear(i)));
+          try {
+            await this.PostToDOMAsync("play", { "originalUrl": e, "url": _.url, "type": _.type, "isMusic": d, "tags": this._SplitTags(c), "isLooping": 0 !== s, "vol": this.DbToLinear(i), "pos": 0, "off": p, "trueClock": !!self["C3_GetAudioContextCurrentTime"], "panning": { "x": a, "y": n, "z": o, "angle": B0.toRadians(r), "innerAngle": B0.toRadians(l), "outerAngle": B0.toRadians(h), "outerGain": this.DbToLinear(u) } });
+          } finally {
+            f && (f["placeholder"] = this._runtime.GetTickCountNoSave());
+          }
+        }
+      }
+    }, async PlayAtObjectByName(t, e, s, i, a, n, o, r, l) {
+      if (!this._isSilent && !this._isSilent && a) {
+        const h = a.GetFirstPicked();
+        if (h && h.GetWorldInfo()) {
+          const u = h.GetWorldInfo(), c = u.GetLayer().GetAngle(), [d, _] = this.rotatePtAround(u.GetX(), u.GetY(), -c, this._listenerPos[0], this._listenerPos[1]), p = 1 === t, f = this._runtime.GetAssetManager().GetProjectAudioFileUrl(e) || this._remoteUrls.get(e.toLowerCase());
+          if (f) {
+            const g = this._nextPlayTime, m = (this._nextPlayTime = 0, this._MaybeMarkAsPlaying(e, l, p, 0 !== s, this.DbToLinear(i)));
+            try {
+              await this.PostToDOMAsync("play", { "originalUrl": e, "url": f.url, "type": f.type, "isMusic": p, "tags": this._SplitTags(l), "isLooping": 0 !== s, "vol": this.DbToLinear(i), "pos": 0, "off": g, "trueClock": !!self["C3_GetAudioContextCurrentTime"], "panning": { "x": d, "y": _, "z": u.GetTotalZElevation(), "angle": u.GetAngle() - c, "innerAngle": B0.toRadians(n), "outerAngle": B0.toRadians(o), "outerGain": this.DbToLinear(r), "uid": h.GetUID() } });
+            } finally {
+              m && (m["placeholder"] = this._runtime.GetTickCountNoSave());
+            }
+          }
+        }
+      }
+    }, SetLooping(t, e) {
+      this.PostToDOM("set-looping", { "tags": this._SplitTags(t), "isLooping": 0 === e });
+    }, SetMuted(t, e) {
+      this.PostToDOM("set-muted", { "tags": this._SplitTags(t), "isMuted": 0 === e });
+    }, SetVolume(t, e) {
+      this.PostToDOM("set-volume", { "tags": this._SplitTags(t), "vol": this.DbToLinear(e) });
+    }, FadeVolume(t, e, s, i) {
+      this.PostToDOM("fade-volume", { "tags": this._SplitTags(t), "vol": this.DbToLinear(e), "duration": s, "stopOnEnd": 0 === i });
+    }, SetStereoPan(t, e) {
+      this.PostToDOM("set-stereo-pan", { "tags": this._SplitTags(t), "p": B0.clamp(e / 100, -1, 1) });
+    }, async Preload(t) {
+      const e = t[1], s = this._runtime.GetAssetManager().GetProjectAudioFileUrl(t[0]);
+      s && (this._preloadTotal++, await this.PostToDOMAsync("preload", { "originalUrl": t[0], "url": s.url, "type": s.type, "isMusic": e }), this._preloadCount++);
+    }, async PreloadByName(t, e) {
+      const s = 1 === t, i = this._runtime.GetAssetManager().GetProjectAudioFileUrl(e) || this._remoteUrls.get(e.toLowerCase());
+      i && (this._preloadTotal++, await this.PostToDOMAsync("preload", { "originalUrl": e, "url": i.url, "type": i.type, "isMusic": s }), this._preloadCount++);
+    }, SetPlaybackRate(t, e) {
+      this.PostToDOM("set-playback-rate", { "tags": this._SplitTags(t), "rate": Math.max(e, 0) });
+    }, Stop(t) {
+      this._MaybeMarkAsStopped(t), this.PostToDOM("stop", { "tags": this._SplitTags(t) });
+    }, StopAll() {
+      this._StopAll();
+    }, SetPaused(t, e) {
+      this.PostToDOM("set-paused", { "tags": this._SplitTags(t), "paused": 0 === e });
+    }, Seek(t, e) {
+      this.PostToDOM("seek", { "tags": this._SplitTags(t), "pos": e });
+    }, SetSilent(t) {
+      2 === t && (t = this._IsSilent() ? 1 : 0), this._SetSilent(0 === t);
+    }, SetMasterVolume(t) {
+      const e = this.DbToLinear(t);
+      this._SetMasterVolume(e);
+    }, AddFilterEffect(t, e, s, i, a, n, o) {
+      const r = C0[e];
+      this._IncrementEffectCount(t), this.PostToDOM("add-effect", { "type": "filter", "tags": this._SplitTags(t), "params": [r, s, i, a, n, B0.clamp(o / 100, 0, 1)] });
+    }, AddDelayEffect(t, e, s, i) {
+      this._IncrementEffectCount(t), this.PostToDOM("add-effect", { "type": "delay", "tags": this._SplitTags(t), "params": [e, this.DbToLinear(s), B0.clamp(i / 100, 0, 1)] });
+    }, AddFlangerEffect(t, e, s, i, a, n) {
+      this._IncrementEffectCount(t), this.PostToDOM("add-effect", { "type": "flanger", "tags": this._SplitTags(t), "params": [e / 1e3, s / 1e3, i, a / 100, B0.clamp(n / 100, 0, 1)] });
+    }, AddPhaserEffect(t, e, s, i, a, n, o) {
+      this._IncrementEffectCount(t), this.PostToDOM("add-effect", { "type": "phaser", "tags": this._SplitTags(t), "params": [e, s, i, a, n, B0.clamp(o / 100, 0, 1)] });
+    }, AddConvolutionEffect(t, e, s, i) {
+      const a = this._runtime.GetAssetManager().GetProjectAudioFileUrl(e[0]);
+      a && (this._IncrementEffectCount(t), this.PostToDOM("add-effect", { "type": "convolution", "tags": this._SplitTags(t), "bufferOriginalUrl": e[0], "bufferUrl": a.url, "bufferType": a.type, "params": [0 === s, B0.clamp(i / 100, 0, 1)] }));
+    }, AddGainEffect(t, e) {
+      this._IncrementEffectCount(t), this.PostToDOM("add-effect", { "type": "gain", "tags": this._SplitTags(t), "params": [this.DbToLinear(e)] });
+    }, AddStereoPanEffect(t, e) {
+      this._IncrementEffectCount(t), this.PostToDOM("add-effect", { "type": "stereopan", "tags": this._SplitTags(t), "params": [B0.clamp(e / 100, -1, 1)] });
+    }, AddMuteEffect(t) {
+      this._IncrementEffectCount(t), this.PostToDOM("add-effect", { "type": "gain", "tags": this._SplitTags(t), "params": [0] });
+    }, AddTremoloEffect(t, e, s) {
+      this._IncrementEffectCount(t), this.PostToDOM("add-effect", { "type": "tremolo", "tags": this._SplitTags(t), "params": [e, B0.clamp(s / 100, 0, 1)] });
+    }, AddRingModEffect(t, e, s) {
+      this._IncrementEffectCount(t), this.PostToDOM("add-effect", { "type": "ringmod", "tags": this._SplitTags(t), "params": [e, B0.clamp(s / 100, 0, 1)] });
+    }, AddDistortionEffect(t, e, s, i, a, n) {
+      this._IncrementEffectCount(t), this.PostToDOM("add-effect", { "type": "distortion", "tags": this._SplitTags(t), "params": [this.DbToLinearNoCap(e), this.DbToLinearNoCap(s), i, this.DbToLinearNoCap(a), B0.clamp(n / 100, 0, 1)] });
+    }, AddCompressorEffect(t, e, s, i, a, n) {
+      this._IncrementEffectCount(t), this.PostToDOM("add-effect", { "type": "compressor", "tags": this._SplitTags(t), "params": [e, s, i, a / 1e3, n / 1e3] });
+    }, AddAnalyserEffect(t, e, s) {
+      this._IncrementEffectCount(t), this.PostToDOM("add-effect", { "type": "analyser", "tags": this._SplitTags(t), "params": [e, s] });
+    }, RemoveEffects(t) {
+      const e = this._SplitTags(t);
+      for (const s of e) this._effectCount.set(s.toLowerCase(), 0);
+      this.PostToDOM("remove-effects", { "tags": e }), this._lastFxState = {};
+    }, SetEffectParameter(t, e, s, i, a, n) {
+      this.PostToDOM("set-effect-param", { "tags": this._SplitTags(t), "index": Math.floor(e), "param": s, "value": i, "ramp": a, "time": n });
+    }, SetListenerObject(t) {
+      if (t) {
+        const e = t.GetFirstPicked();
+        e && e.GetWorldInfo() && (this._listenerInst = e);
+      }
+    }, SetListenerZ(t) {
+      this._listenerPos[2] = t;
+    }, SetListenerOrientation(t, e, s, i, a, n) {
+      this._listenerForwardVec[0] = t, this._listenerForwardVec[1] = e, this._listenerForwardVec[2] = -s, this._listenerUpVec[0] = i, this._listenerUpVec[1] = a, this._listenerUpVec[2] = -n;
+    }, ScheduleNextPlay(t) {
+      this._nextPlayTime = Math.max(t, 0);
+    }, UnloadAudio(t) {
+      const e = t[1], s = this._runtime.GetAssetManager().GetProjectAudioFileUrl(t[0]);
+      s && this.PostToDOM("unload", { "url": s.url, "type": s.type, "isMusic": e });
+    }, UnloadAudioByName(t, e) {
+      const s = 1 === t, i = this._runtime.GetAssetManager().GetProjectAudioFileUrl(e) || this._remoteUrls.get(e.toLowerCase());
+      i && this.PostToDOM("unload", { "url": i.url, "type": i.type, "isMusic": s });
+    }, UnloadAll() {
+      this.PostToDOM("unload-all");
+    }, AddRemoteURL(t, e, s) {
+      this._remoteUrls.set(s.toLowerCase(), { url: t, type: e });
+    } };
+  }
+  {
+    const x2 = self.C3;
+    x2.Plugins.Audio.Exps = { Duration(t) {
+      const e = this._GetFirstAudioStateByTags(t);
+      return e ? e["duration"] : 0;
+    }, PlaybackTime(t) {
+      const e = this._GetFirstAudioStateByTags(t);
+      return e ? e["playbackTime"] : 0;
+    }, PlaybackRate(t) {
+      const e = this._GetFirstAudioStateByTags(t);
+      return e ? e["playbackRate"] : 0;
+    }, Volume(t) {
+      const e = this._GetFirstAudioStateByTags(t);
+      return e ? this.LinearToDb(e["volume"]) : 0;
+    }, MasterVolume() {
+      return this.LinearToDb(this._GetMasterVolume());
+    }, EffectCount(t) {
+      return this._effectCount.get(t.toLowerCase()) || 0;
+    }, AnalyserFreqBinCount(t, e) {
+      const s = this.GetAnalyserData(t, Math.floor(e));
+      return s ? s["binCount"] : 0;
+    }, AnalyserFreqBinAt(t, e, s) {
+      const i = this.GetAnalyserData(t, Math.floor(e));
+      return !i || (s = Math.floor(s)) < 0 || s >= i["binCount"] ? 0 : i["freqBins"][s];
+    }, AnalyserPeakLevel(t, e) {
+      const s = this.GetAnalyserData(t, Math.floor(e));
+      return s ? s["peak"] : 0;
+    }, AnalyserRMSLevel(t, e) {
+      const s = this.GetAnalyserData(t, Math.floor(e));
+      return s ? s["rms"] : 0;
+    }, SampleRate() {
+      return this._sampleRate;
+    }, CurrentTime() {
+      return self["C3_GetAudioContextCurrentTime"] ? self["C3_GetAudioContextCurrentTime"]() : performance.now() / 1e3;
+    }, OutputLatency() {
+      return this._outputLatency;
+    }, NormalizedVolume(t, e) {
+      return 0 === (t = x2.clamp(+t, 0, 100) / 100) ? -1 / 0 : t < 0.1 ? this.LinearToDb(x2.lerp(0, this.DbToLinear(e), 10 * t)) : x2.lerp(e, 0, (t - 0.1) / 0.9);
+    } };
+  }
+}
+var GetAudioSdkInstance2;
+var GetAudioDOMInterface2;
+{
+  {
+    const a = self.C3;
+    a.Behaviors.Bullet = class extends a.SDKBehaviorBase {
+      constructor(t) {
+        super(t);
+      }
+      Release() {
+        super.Release();
+      }
+    };
+  }
+  {
+    const d = self.C3;
+    d.Behaviors.Bullet.Type = class extends d.SDKBehaviorTypeBase {
+      constructor(t) {
+        super(t);
+      }
+      Release() {
+        super.Release();
+      }
+      OnCreate() {
+      }
+    };
+  }
+  {
+    const g = self.C3, h = self.C3X, i = self.IBehaviorInstance, j = 0, k = 1, l = 2, m = 3, n = 4, o = 5, p = 6, q = (g.Behaviors.Bullet.Instance = class extends g.SDKBehaviorInstanceBase {
+      constructor(t, e) {
+        super(t);
+        const s = this.GetWorldInfo(), i2 = (this._speed = 0, this._acc = 0, this._g = 0, this._bounceOffSolid = false, this._setAngle = false, this._isStepping = false, this._isEnabled = true, this._dx = 0, this._dy = 0, this._lastX = s.GetX(), this._lastY = s.GetY(), this._lastKnownAngle = s.GetAngle(), this._travelled = 0, this._stepSize = Math.min(Math.abs(s.GetWidth()), Math.abs(s.GetHeight()) / 2), this._stopStepping = false, e && (this._speed = e[j], this._acc = e[k], this._g = e[l], this._bounceOffSolid = !!e[m], this._setAngle = !!e[n], this._isStepping = !!e[o], this._isEnabled = !!e[p]), s.GetAngle());
+        this._dx = Math.cos(i2) * this._speed, this._dy = Math.sin(i2) * this._speed, this._isEnabled && (this._StartTicking(), this._bounceOffSolid) && this._StartPostTicking();
+      }
+      Release() {
+        super.Release();
+      }
+      SaveToJson() {
+        const t = { "dx": this._dx, "dy": this._dy, "lx": this._lastX, "ly": this._lastY, "lka": this._lastKnownAngle, "t": this._travelled };
+        return 0 !== this._acc && (t["acc"] = this._acc), 0 !== this._g && (t["g"] = this._g), this._isStepping && (t["st"] = this._isStepping), this._isEnabled || (t["e"] = this._isEnabled), this._bounceOffSolid && (t["bos"] = this._bounceOffSolid), this._setAngle && (t["sa"] = this._setAngle), t;
+      }
+      LoadFromJson(t) {
+        this._dx = t["dx"], this._dy = t["dy"], this._lastX = t["lx"], this._lastY = t["ly"], this._lastKnownAngle = t["lka"], this._travelled = t["t"], this._acc = t.hasOwnProperty("acc") ? t["acc"] : 0, this._g = t.hasOwnProperty("g") ? t["g"] : 0, this._isStepping = !!t.hasOwnProperty("st") && t["st"], this._bounceOffSolid = !!t.hasOwnProperty("bos") && t["bos"], this._setAngle = !!t.hasOwnProperty("sa") && t["sa"], this._SetEnabled(!t.hasOwnProperty("e") || t["e"]);
+      }
+      Tick() {
+        if (this._isEnabled) {
+          const n2 = this._runtime.GetDt(this._inst), h2 = this._inst.GetWorldInfo();
+          if (h2.GetAngle() !== this._lastKnownAngle) {
+            const t = h2.GetAngle();
+            if (this._setAngle) {
+              const e = g.distanceTo(0, 0, this._dx, this._dy);
+              this._dx = Math.cos(t) * e, this._dy = Math.sin(t) * e;
+            }
+            this._lastKnownAngle = t;
+          }
+          let s = 0, i2 = 0;
+          if (0 !== this._acc) {
+            let t = g.distanceTo(0, 0, this._dx, this._dy), e = 0;
+            e = 0 === this._dx && 0 === this._dy ? h2.GetAngle() : g.angleTo(0, 0, this._dx, this._dy), t += this._acc * n2, s = Math.cos(e) * this._acc, i2 = Math.sin(e) * this._acc, t < 0 && (t = 0, s = 0, i2 = 0), this._dx = Math.cos(e) * t, this._dy = Math.sin(e) * t;
+          }
+          if (0 !== this._g && (this._dy += this._g * n2, i2 += this._g), this._lastX = h2.GetX(), this._lastY = h2.GetY(), 0 !== this._dx || 0 !== this._dy) {
+            const a = this._dx * n2 + 0.5 * s * n2 * n2, _ = this._dy * n2 + 0.5 * i2 * n2 * n2, l2 = g.distanceTo(0, 0, a, _);
+            if (this._MoveBy(a, _, l2), this._travelled += l2, this._setAngle && (0 != a || 0 != _)) {
+              const o2 = g.angleTo(0, 0, a, _);
+              h2.SetAngle(o2), this._lastKnownAngle = h2.GetAngle();
+            }
+            h2.SetBboxChanged();
+          }
+        }
+      }
+      _MoveBy(t, e, s) {
+        const i2 = this.GetWorldInfo();
+        if (!this._isStepping || s <= this._stepSize) i2.OffsetXY(t, e), i2.SetBboxChanged(), this._isStepping && this.Trigger(g.Behaviors.Bullet.Cnds.OnStep);
+        else {
+          this._stopStepping = false;
+          const n2 = i2.GetX(), h2 = i2.GetY(), a = n2 + t, _ = h2 + e, l2 = g.angleTo(0, 0, t, e), o2 = Math.cos(l2) * this._stepSize, r = Math.sin(l2) * this._stepSize, d = Math.floor(s / this._stepSize);
+          for (let t2 = 1; t2 <= d; ++t2) if (i2.SetXY(n2 + o2 * t2, h2 + r * t2), i2.SetBboxChanged(), this.Trigger(g.Behaviors.Bullet.Cnds.OnStep), this._inst.IsDestroyed() || this._stopStepping) return;
+          i2.SetXY(a, _), i2.SetBboxChanged(), this.Trigger(g.Behaviors.Bullet.Cnds.OnStep);
+        }
+      }
+      PostTick() {
+        if (this._isEnabled && this._bounceOffSolid && (0 !== this._dx || 0 !== this._dy)) {
+          const t = this._runtime.GetDt(this._inst), e = this._inst.GetWorldInfo(), s = this._runtime.GetCollisionEngine(), i2 = s.TestOverlapSolid(this._inst);
+          if (i2) {
+            s.RegisterCollision(this._inst, i2);
+            const n2 = g.distanceTo(0, 0, this._dx, this._dy), h2 = s.CalculateBounceAngle(this._inst, this._lastX, this._lastY);
+            this._dx = Math.cos(h2) * n2, this._dy = Math.sin(h2) * n2, e.OffsetXY(this._dx * t, this._dy * t), e.SetBboxChanged(), this._setAngle && (e.SetAngle(h2), this._lastKnownAngle = e.GetAngle(), e.SetBboxChanged()), s.PushOutSolid(this._inst, this._dx / n2, this._dy / n2, Math.max(2.5 * n2 * t, 30)) || s.PushOutSolidNearest(this._inst, 100);
+          }
+        }
+      }
+      GetPropertyValueByIndex(t) {
+        switch (t) {
+          case j:
+            return this._GetSpeed();
+          case k:
+            return this._GetAcceleration();
+          case l:
+            return this._GetGravity();
+          case n:
+            return this._setAngle;
+          case o:
+            return this._isStepping;
+          case p:
+            return this._IsEnabled();
+        }
+      }
+      SetPropertyValueByIndex(t, e) {
+        switch (t) {
+          case j:
+            this._SetSpeed(e);
+            break;
+          case k:
+            this._acc = e;
+            break;
+          case l:
+            this._g = e;
+            break;
+          case n:
+            this._setAngle = !!e;
+            break;
+          case o:
+            this._isStepping = !!e;
+            break;
+          case p:
+            this._SetEnabled(!!e);
+        }
+      }
+      _SetSpeed(t) {
+        const e = g.angleTo(0, 0, this._dx, this._dy);
+        this._dx = Math.cos(e) * t, this._dy = Math.sin(e) * t;
+      }
+      _GetSpeed() {
+        return g.roundToDp(g.distanceTo(0, 0, this._dx, this._dy), 6);
+      }
+      _SetAcceleration(t) {
+        this._acc = t;
+      }
+      _GetAcceleration() {
+        return this._acc;
+      }
+      _SetGravity(t) {
+        this._g = t;
+      }
+      _GetGravity() {
+        return this._g;
+      }
+      _SetAngleOfMotion(t) {
+        const e = g.distanceTo(0, 0, this._dx, this._dy);
+        this._dx = Math.cos(t) * e, this._dy = Math.sin(t) * e;
+      }
+      _GetAngleOfMotion() {
+        return g.angleTo(0, 0, this._dx, this._dy);
+      }
+      _SetBounceOffSolids(t) {
+        this._bounceOffSolid !== (t = !!t) && (this._bounceOffSolid = t, this._isEnabled) && (this._bounceOffSolid ? this._StartPostTicking() : this._StopPostTicking());
+      }
+      _IsBounceOffSolids() {
+        return this._bounceOffSolid;
+      }
+      _SetDistanceTravelled(t) {
+        this._travelled = t;
+      }
+      _GetDistanceTravelled() {
+        return this._travelled;
+      }
+      _SetEnabled(t) {
+        this._isEnabled = !!t, this._isEnabled ? (this._StartTicking(), this._bounceOffSolid && this._StartPostTicking()) : (this._StopTicking(), this._StopPostTicking());
+      }
+      _IsEnabled() {
+        return this._isEnabled;
+      }
+      GetDebuggerProperties() {
+        const t = "behaviors.bullet";
+        return [{ title: "$" + this.GetBehaviorType().GetName(), properties: [{ name: t + ".debugger.vector-x", value: this._dx, onedit: (t2) => this._dx = t2 }, { name: t + ".debugger.vector-y", value: this._dy, onedit: (t2) => this._dy = t2 }, { name: t + ".properties.speed.name", value: this._GetSpeed(), onedit: (t2) => this._SetSpeed(t2) }, { name: t + ".debugger.angle-of-motion", value: g.toDegrees(this._GetAngleOfMotion()) }, { name: t + ".properties.gravity.name", value: this._GetGravity(), onedit: (t2) => this._SetGravity(t2) }, { name: t + ".properties.acceleration.name", value: this._GetAcceleration(), onedit: (t2) => this._SetAcceleration(t2) }, { name: t + ".debugger.distance-travelled", value: this._GetDistanceTravelled() }, { name: t + ".properties.enabled.name", value: this._IsEnabled(), onedit: (t2) => this._SetEnabled(t2) }] }];
+      }
+      GetScriptInterfaceClass() {
+        return self.IBulletBehaviorInstance;
+      }
+    }, /* @__PURE__ */ new WeakMap());
+    self.IBulletBehaviorInstance = class extends i {
+      constructor() {
+        super(), q.set(this, i._GetInitInst().GetSdkInstance());
+      }
+      get speed() {
+        return q.get(this)._GetSpeed();
+      }
+      set speed(t) {
+        h.RequireFiniteNumber(t), q.get(this)._SetSpeed(t);
+      }
+      get acceleration() {
+        return q.get(this)._GetAcceleration();
+      }
+      set acceleration(t) {
+        h.RequireFiniteNumber(t), q.get(this)._SetAcceleration(t);
+      }
+      get gravity() {
+        return q.get(this)._GetGravity();
+      }
+      set gravity(t) {
+        h.RequireFiniteNumber(t), q.get(this)._SetGravity(t);
+      }
+      get angleOfMotion() {
+        return q.get(this)._GetAngleOfMotion();
+      }
+      set angleOfMotion(t) {
+        h.RequireFiniteNumber(t), q.get(this)._SetAngleOfMotion(t);
+      }
+      get bounceOffSolids() {
+        return q.get(this)._IsBounceOffSolids();
+      }
+      set bounceOffSolids(t) {
+        q.get(this)._SetBounceOffSolids(!!t);
+      }
+      get distanceTravelled() {
+        return q.get(this)._GetDistanceTravelled();
+      }
+      set distanceTravelled(t) {
+        h.RequireFiniteNumber(t), q.get(this)._SetDistanceTravelled(t);
+      }
+      get isEnabled() {
+        return q.get(this)._IsEnabled();
+      }
+      set isEnabled(t) {
+        q.get(this)._SetEnabled(t);
+      }
+    };
+  }
+  {
+    const Ca = self.C3;
+    Ca.Behaviors.Bullet.Cnds = { CompareSpeed(t, e) {
+      const s = Math.hypot(this._dx, this._dy);
+      return Ca.compare(s, t, e);
+    }, CompareTravelled(t, e) {
+      return Ca.compare(this._GetDistanceTravelled(), t, e);
+    }, OnStep() {
+      return true;
+    }, IsEnabled() {
+      return this._IsEnabled();
+    } };
+  }
+  {
+    const Ia = self.C3;
+    Ia.Behaviors.Bullet.Acts = { SetSpeed(t) {
+      this._SetSpeed(t);
+    }, SetAcceleration(t) {
+      this._SetAcceleration(t);
+    }, SetGravity(t) {
+      this._SetGravity(t);
+    }, SetAngleOfMotion(t) {
+      this._SetAngleOfMotion(Ia.toRadians(t));
+    }, Bounce(t) {
+      if (t) {
+        const e = t.GetFirstPicked(this._inst);
+        if (e) {
+          const s = this._inst.GetWorldInfo(), i = this._runtime.GetCollisionEngine(), n = this._runtime.GetDt(this._inst), h = Ia.distanceTo(0, 0, this._dx, this._dy), a = i.CalculateBounceAngle(this._inst, this._lastX, this._lastY, e);
+          this._dx = Math.cos(a) * h, this._dy = Math.sin(a) * h, s.OffsetXY(this._dx * n, this._dy * n), s.SetBboxChanged(), this._setAngle && (s.SetAngle(a), this._lastKnownAngle = s.GetAngle(), s.SetBboxChanged()), 0 !== h && (this._bounceOffSolid ? i.PushOutSolid(this._inst, this._dx / h, this._dy / h, Math.max(2.5 * h * n, 30)) || i.PushOutSolidNearest(this._inst, 100) : i.PushOut(this._inst, this._dx / h, this._dy / h, Math.max(2.5 * h * n, 30), e));
+        }
+      }
+    }, SetBounceOffSolids(t) {
+      this._SetBounceOffSolids(t);
+    }, SetDistanceTravelled(t) {
+      this._SetDistanceTravelled(t);
+    }, SetEnabled(t) {
+      this._SetEnabled(t);
+    }, StopStepping() {
+      this._stopStepping = true;
+    } };
+  }
+  {
+    const Xa = self.C3;
+    Xa.Behaviors.Bullet.Exps = { Speed() {
+      return this._GetSpeed();
+    }, Acceleration() {
+      return this._GetAcceleration();
+    }, AngleOfMotion() {
+      return Xa.toDegrees(this._GetAngleOfMotion());
+    }, DistanceTravelled() {
+      return this._GetDistanceTravelled();
+    }, Gravity() {
+      return this._GetGravity();
+    } };
+  }
+}
+{
   let unaryminus = function(n) {
     return typeof n === "number" ? -n : n;
   }, bothNumbers = function(a, b) {
@@ -30973,10 +32167,20 @@ var GetTouchSdkInstance2;
   unaryminus2 = unaryminus, bothNumbers2 = bothNumbers, add2 = add, subtract2 = subtract, multiply2 = multiply, divide2 = divide, mod2 = mod, pow2 = pow, and2 = and, or2 = or;
   const C32 = self.C3;
   self.C3_ExpressionFuncs = [
-    () => 1,
     (p) => {
       const v0 = p._GetNode(0).GetVar();
       return () => v0.GetValue();
+    },
+    () => 0,
+    (p) => {
+      const f0 = p._GetNode(0).GetBoundMethod();
+      return () => f0();
+    },
+    () => "",
+    () => 1e3,
+    (p) => {
+      const f0 = p._GetNode(0).GetBoundMethod();
+      return () => f0(250, 290);
     }
   ];
 }
@@ -30995,28 +32199,47 @@ var or2;
 var C3 = self.C3;
 self.C3_GetObjectRefTable = function() {
   return [
-    C3.Plugins.Button,
     C3.Plugins.Touch,
+    C3.Plugins.Sprite,
     C3.Plugins.Text,
-    C3.Plugins.Button.Cnds.OnClicked,
+    C3.Behaviors.Bullet,
+    C3.Plugins.Audio,
+    C3.Plugins.Touch.Cnds.OnTapGestureObject,
     C3.Plugins.System.Acts.AddVar,
-    C3.Plugins.Text.Acts.SetText
+    C3.Plugins.System.Acts.CreateObject,
+    C3.Plugins.Touch.Exps.X,
+    C3.Plugins.Touch.Exps.Y,
+    C3.Plugins.System.Cnds.EveryTick,
+    C3.Plugins.Text.Acts.SetText,
+    C3.Plugins.Sprite.Cnds.OnCreated,
+    C3.Behaviors.Bullet.Acts.SetSpeed,
+    C3.Behaviors.Bullet.Acts.SetAngleOfMotion,
+    C3.Plugins.System.Exps.random,
+    C3.Plugins.Audio.Acts.Play
   ];
 };
 self.C3_JsPropNameTable = [
-  { ButtonNextDay: 0 },
   { \u0422\u0430\u0447: 0 },
-  { DayCounterText: 0 },
-  { DayCounterNumber: 0 },
-  { Day: 0 }
+  { GlobalButton: 0 },
+  { Label: 0 },
+  { Counter: 0 },
+  { \u041F\u0443\u043B\u044F: 0 },
+  { Coin: 0 },
+  { \u0410\u0443\u0434\u0438\u043E: 0 },
+  { Gold: 0 },
+  { CoinPerClick: 0 }
 ];
 self.InstanceType = {
-  ButtonNextDay: class extends self.IButtonInstance {
-  },
   \u0422\u0430\u0447: class extends self.IInstance {
   },
-  DayCounterText: class extends self.ITextInstance {
+  GlobalButton: class extends self.ISpriteInstance {
   },
-  DayCounterNumber: class extends self.ITextInstance {
+  Label: class extends self.ITextInstance {
+  },
+  Counter: class extends self.ITextInstance {
+  },
+  Coin: class extends self.ISpriteInstance {
+  },
+  \u0410\u0443\u0434\u0438\u043E: class extends self.IInstance {
   }
 };
